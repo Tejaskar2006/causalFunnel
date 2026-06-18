@@ -1,5 +1,6 @@
 (function() {
-    const API_URL = 'http://localhost:5000/api/events';
+    // Use Vite env variable if available, fallback to localhost
+    const API_URL = (import.meta.env?.VITE_API_URL || 'http://localhost:5000/api') + '/events';
 
     function getSessionId() {
         let sessionId = localStorage.getItem('cf_session_id');

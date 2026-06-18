@@ -10,6 +10,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Routes
+const eventRoutes = require('./routes/eventRoutes');
+app.use('/api', eventRoutes);
+
 // Basic test route
 app.get('/', (req, res) => {
   res.send('CausalFunnel Analytics API is running...');
