@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Demo Page</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; background: #f0f4f8; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 1rem; cursor: pointer; }
+        .card:hover { transform: translateY(-2px); transition: 0.2s; }
+    </style>
+</head>
+<body>
+    <h1>Analytics Demo</h1>
+    <p>Click around this page to generate events. Check your network tab to see the API requests being made.</p>
+    
+    <div class="card" id="card1">
+        <h2>Feature 1</h2>
+        <p>Click me to trigger an event on this specific card.</p>
+    </div>
+
+    <div class="card" id="card2">
+        <h2>Feature 2</h2>
+        <p>Another area to click and test coordinates.</p>
+    </div>
+
+    <!-- Inject the tracker -->
+    <script src="../tracker.js"></script>
+</body>
+</html>
