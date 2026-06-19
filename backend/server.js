@@ -12,7 +12,9 @@ app.use(express.json());
 
 // Routes
 const eventRoutes = require('./routes/eventRoutes');
+const sessionRoutes = require('./routes/sessionRoutes');
 app.use('/api', eventRoutes);
+app.use('/api', sessionRoutes);
 
 // Basic test route
 app.get('/', (req, res) => {
