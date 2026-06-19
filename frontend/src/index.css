@@ -320,3 +320,131 @@ body {
   color: var(--text-primary);
   word-break: break-all;
 }
+
+/* Tabs Navigation */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  background: var(--glass-bg);
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tab.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* Heatmap View */
+.heatmap-controls {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--glass-bg);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.url-select {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  min-width: 300px;
+  outline: none;
+}
+
+.url-select:focus {
+  border-color: var(--accent);
+}
+
+.heatmap-board {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 12px;
+  border: 1px dashed var(--glass-border);
+  overflow: hidden;
+}
+
+.browser-frame {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.browser-header {
+  height: 40px;
+  background: rgba(30, 41, 59, 0.8);
+  border-bottom: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+}
+
+.dot.red { background: #ef4444; }
+.dot.yellow { background: #f59e0b; }
+.dot.green { background: #10b981; }
+
+.browser-body {
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  opacity: 0.2;
+}
+
+.browser-placeholder {
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.heatmap-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(239,68,68,0.8) 0%, rgba(239,68,68,0.4) 50%, rgba(239,68,68,0) 100%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: auto;
+  cursor: crosshair;
+  transition: transform 0.2s;
+}
+
+.heatmap-dot:hover {
+  transform: translate(-50%, -50%) scale(1.5);
+}

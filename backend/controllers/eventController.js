@@ -38,3 +38,27 @@ exports.trackEvent = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+exports.getClickUrls = async (req, res) => {
+  try {
+    const urls = await Event.distinct('url', { event_type: 'click' });
+    res.status(200).json({ success: true, data: urls });
+  } catch (error) {
+    console.error('Error fetching URLs:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+exports.getHeatmapData = async (req, res) => {
+  try {
+    const { url } = req.query;
+    if (!url) {
+      return res.status(400).json({ error: 'URL is required' });
+    }
+    const clicks = await Event.find({ url, event_type: 'click' }, 'x y');
+    res.status(200).json({ success: true, data: clicks });
+  } catch (error) {
+    console.error('Error fetching heatmap data:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
