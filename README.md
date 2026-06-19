@@ -10,7 +10,7 @@ This is a full-stack application for tracking user interactions (`page_view`, `c
 ## Project Structure
 - `/backend`: Node.js Express server
 - `/frontend`: React Vite application (includes the dashboard)
-- `/frontend/tracker`: Tracking script and demo HTML page
+- `/tracker`: Tracking script and demo HTML page
 
 ## Setup Instructions
 
@@ -30,11 +30,12 @@ This is a full-stack application for tracking user interactions (`page_view`, `c
 3. Start the dev server: `npm run dev`
 
 ### Demo / Tracker
-- Open `frontend/tracker/demo/index.html` in your browser to simulate user events. The script will automatically send tracking data to the backend.
+- Open `tracker/demo/index.html` in your browser to simulate user events. The script will automatically send tracking data to the backend.
 
 ## Deployment
 - **Backend:** Hosted on [Render](https://render.com).
 - **Frontend:** Hosted on [Vercel](https://vercel.com).
+- **Tracker:** Hosted separately (e.g., Netlify, Vercel, or AWS S3).
 
 ## Assumptions & Trade-offs
 - Used standard `localStorage` to generate and persist `session_id`. In a real-world scenario, first-party cookies with HTTP-only flags might be used depending on security requirements.
