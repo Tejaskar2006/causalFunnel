@@ -29,13 +29,29 @@ This is a full-stack application for tracking user interactions (`page_view`, `c
 2. Install dependencies: `npm install`
 3. Start the dev server: `npm run dev`
 
-### Demo / Tracker
-- Open `tracker/demo/index.html` in your browser to simulate user events. The script will automatically send tracking data to the backend.
+### Testing the Tracker
+You can test the tracking script in two ways:
+
+**1. Live Demo Page:**
+Visit the live tracker demo page to simulate user events:
+[https://causal-funnel-tracker.vercel.app](https://causal-funnel-tracker.vercel.app)
+
+**2. Inject into Any Real Website:**
+To test tracking on a live site (e.g., Amazon, Flipkart, your own site), open the browser Developer Tools Console (F12) and paste the following snippet:
+
+```javascript
+const script = document.createElement("script");
+script.src = "https://causal-funnel-tracker.vercel.app/tracker.js";
+script.type = "module"; 
+document.head.appendChild(script);
+console.log("CausalFunnel Tracker Injected Successfully!");
+```
+This will instantly log a `page_view` and start tracking all `click` events to your backend.
 
 ## Deployment
-- **Backend:** Hosted on [Render](https://render.com).
-- **Frontend:** Hosted on [Vercel](https://vercel.com).
-- **Tracker:** Hosted separately (e.g., Netlify, Vercel, or AWS S3).
+- **Backend:** Hosted on Render.
+- **Frontend Dashboard:** Hosted on Vercel at [https://causal-funnel-dashboard.vercel.app](https://causal-funnel-dashboard.vercel.app).
+- **Tracker & Demo:** Hosted on Vercel at [https://causal-funnel-tracker.vercel.app](https://causal-funnel-tracker.vercel.app).
 
 ## Assumptions & Trade-offs
 - Used standard `localStorage` to generate and persist `session_id`. In a real-world scenario, first-party cookies with HTTP-only flags might be used depending on security requirements.
