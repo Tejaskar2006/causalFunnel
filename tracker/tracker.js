@@ -33,10 +33,8 @@
         }).catch(err => console.error('Tracking error:', err));
     }
 
-    // Track Page View
-    window.addEventListener('load', () => {
-        sendEvent('page_view');
-    });
+    // Track Page View immediately when script executes
+    sendEvent('page_view');
 
     // Track Clicks
     window.addEventListener('click', (e) => {
