@@ -2,10 +2,15 @@
 
 This is a full-stack application for tracking user interactions (`page_view`, `click`) on a web page and visualizing them on a dashboard.
 
+## Deployment
+- **Backend:** Hosted on Render.
+- **Frontend Dashboard:** Hosted on Vercel at [https://causal-funnel-dashboard.vercel.app](https://causal-funnel-dashboard.vercel.app).
+- **Tracker & Demo:** Hosted on Vercel at [https://causal-funnel-tracker.vercel.app](https://causal-funnel-tracker.vercel.app).
+
 ## Tech Stack
 - **Tracker:** Vanilla JavaScript (`tracker/tracker.js`)
 - **Backend:** Node.js, Express.js, MongoDB (Mongoose) with an MVC structure (`models`, `controllers`, `routes`).
-- **Frontend Dashboard:** React.js + Vite
+- **Frontend Dashboard:** React.js + Vite (Includes auto-refresh polling for real-time updates)
 
 ## Project Structure
 - `/backend`: Node.js Express server
@@ -48,11 +53,8 @@ console.log("CausalFunnel Tracker Injected Successfully!");
 ```
 This will instantly log a `page_view` and start tracking all `click` events to your backend.
 
-## Deployment
-- **Backend:** Hosted on Render.
-- **Frontend Dashboard:** Hosted on Vercel at [https://causal-funnel-dashboard.vercel.app](https://causal-funnel-dashboard.vercel.app).
-- **Tracker & Demo:** Hosted on Vercel at [https://causal-funnel-tracker.vercel.app](https://causal-funnel-tracker.vercel.app).
 
 ## Assumptions & Trade-offs
 - Used standard `localStorage` to generate and persist `session_id`. In a real-world scenario, first-party cookies with HTTP-only flags might be used depending on security requirements.
 - The `click` tracker captures basic `x` and `y` client coordinates. For a robust heatmap, elements or window resizing strategies might need additional normalization.
+- **Auto-Refresh Dashboard:** Implemented a short-polling mechanism (`setInterval`) in React that fetches new sessions every 5 seconds. This is a simple and effective alternative to setting up WebSockets for real-time updates in a small-scale assignment.

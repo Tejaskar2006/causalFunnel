@@ -18,8 +18,9 @@ function App() {
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   useEffect(() => {
-    if (activeTab === 'sessions') {
-      setLoading(true);
+    let intervalId;
+
+    const fetchSessions = () => {
       fetch(`${API_URL}/sessions`)
         .then(res => res.json())
         .then(data => {
@@ -30,6 +31,12 @@ function App() {
           console.error('Failed to fetch sessions:', err);
           setLoading(false);
         });
+    };
+
+    if (activeTab === 'sessions') {
+      setLoading(true);
+      fetchSessions(); // Fetch immediately
+      intervalId = setInterval(fetchSessions, 5000); // Poll every 5 seconds
     } else if (activeTab === 'heatmap') {
       fetch(`${API_URL}/heatmap/urls`)
         .then(res => res.json())
@@ -42,6 +49,11 @@ function App() {
           }
         });
     }
+
+    // Cleanup interval on unmount or tab switch
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
   }, [API_URL, activeTab]);
 
   useEffect(() => {
@@ -151,28 +163,32 @@ function App() {
             {loadingHeatmap ? (
               <div className="loader">Loading heatmap data...</div>
             ) : (
-              <div className="heatmap-board">
-                {heatmapData.length === 0 && <p className="no-data">No clicks recorded for this URL.</p>}
-                {heatmapData.map((click, i) => (
-                  <div
-                    key={click._id || i}
-                    className="heatmap-dot"
-                    style={{ left: click.x, top: click.y }}
-                    title={`Click at X:${click.x}, Y:${click.y}`}
-                  ></div>
-                ))}
-                {/* Background dummy browser frame for visualization */}
-                <div className="browser-frame">
-                  <div className="browser-header">
-                    <span className="dot red"></span>
-                    <span className="dot yellow"></span>
-                    <span className="dot green"></span>
+              (() => {
+                const maxX = Math.max(1200, ...(heatmapData.map(c => c.x) || []));
+                return (
+                  <div className="heatmap-board">
+                    {heatmapData.length === 0 && <p className="no-data">No clicks recorded for this URL.</p>}
+                    {heatmapData.map((click, i) => (
+                      <div 
+                        key={click._id || i}
+                        className="heatmap-dot"
+                        style={{ left: `${(click.x / maxX) * 100}%`, top: click.y + 40 }}
+                        title={`Click at X:${click.x}, Y:${click.y}`}
+                      ></div>
+                    ))}
+                    {/* Background dummy browser frame for visualization */}
+                    <div className="browser-frame">
+                      <div className="browser-header">
+                        <span className="dot red"></span>
+                        <span className="dot yellow"></span>
+                        <span className="dot green"></span>
+                      </div>
+                      <div className="browser-body">
+                      </div>
+                    </div>
                   </div>
-                  <div className="browser-body">
-                    {/* <p className="browser-placeholder">Visualizing clicks relative to the top-left corner of the window. Note that variations in window sizes might offset absolute coordinates in a real environment.</p> */}
-                  </div>
-                </div>
-              </div>
+                );
+              })()
             )}
           </div>
         )}

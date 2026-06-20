@@ -355,6 +355,11 @@ body {
 }
 
 /* Heatmap View */
+.heatmap-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .heatmap-controls {
   margin-bottom: 2rem;
   display: flex;
