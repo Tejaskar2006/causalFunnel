@@ -4,7 +4,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        entryFileNames: `[name].js`,
+        entryFileNames: `tracker.js`,
         chunkFileNames: `[name].js`,
         assetFileNames: `[name].[ext]`
       }
